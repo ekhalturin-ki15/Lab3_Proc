@@ -38,6 +38,10 @@ int main(int amount, char* param[])
 	OutAll(outfile, container);
 
 	std::cout << "Данные выведенны в файл" << std::endl << "количество объектов: " << container.WatAmount() << std::endl;
+	
+	std::cout << "Фильтрованный вывод" << std::endl;
+	outfile << "---------------------\n";
+	OutAll(outfile, container, true);
 
 	container.Clear();
 

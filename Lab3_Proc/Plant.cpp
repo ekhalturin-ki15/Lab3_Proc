@@ -31,7 +31,7 @@ void GetFlower(std::ifstream& infile, int type, Plant& object)
 
 }
 
-void OutAll(std::ofstream& outfile, RingList<Plant> container)
+void OutAll(std::ofstream& outfile, RingList<Plant> container, bool filter)
 {
 	ElementRL<Plant>* it = container.begin();
 	for (int i = 0; i < container.WatAmount(); i++)
@@ -42,6 +42,7 @@ void OutAll(std::ofstream& outfile, RingList<Plant> container)
 			OutTree(outfile, it->data.t);
 			break;
 		case Type::bush:
+			if (filter) break;
 			OutBush(outfile, it->data.b);
 			break;
 		}
