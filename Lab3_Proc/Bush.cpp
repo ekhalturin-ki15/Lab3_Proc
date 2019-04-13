@@ -1,4 +1,4 @@
-#include "Bush.h"
+ï»¿#include "Bush.h"
 
 void InBush(std::ifstream& infile, Bush& b)
 {
@@ -13,18 +13,18 @@ void InBush(std::ifstream& infile, Bush& b)
 void OutBush(std::ofstream& outfile, Bush b)
 {
 
-	outfile << "Ýòî êóñòàðíèê, ";
+	outfile << "Ð­Ñ‚Ð¾ ÐºÑƒÑÑ‚Ð°Ñ€Ð½Ð¸Ðº, ";
 
 	if (1 <= b.month && b.month <= watIsMonth.size())
 	{
-		outfile << "ìåñÿö öâåòåíèÿ - " << watIsMonth[b.month - 1];
+		outfile << "Ð¼ÐµÑÑÑ† Ñ†Ð²ÐµÑ‚ÐµÐ½Ð¸Ñ - " << watIsMonth[b.month - 1];
 
 	}
 	else
 	{
-		outfile << "ìåñÿö öâåòåíèÿ ñ÷èòàëñÿ íåêîððåêòíî";
+		outfile << "Ð¼ÐµÑÑÑ† Ñ†Ð²ÐµÑ‚ÐµÐ½Ð¸Ñ ÑÑ‡Ð¸Ñ‚Ð°Ð»ÑÑ Ð½ÐµÐºÐ¾Ñ€Ñ€ÐµÐºÑ‚Ð½Ð¾";
 	}
 
-	outfile << ", Åãî íàçâàíèå: " << b.name << "\n";
+	outfile << ", Ð•Ð³Ð¾ Ð½Ð°Ð·Ð²Ð°Ð½Ð¸Ðµ: " << b.name << "\n";
 
 }

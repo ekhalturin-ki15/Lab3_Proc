@@ -1,4 +1,4 @@
-#include "Tree.h"
+ï»¿#include "Tree.h"
 
 void InTree(std::ifstream& infile, Tree& t)
 {
@@ -11,9 +11,9 @@ void InTree(std::ifstream& infile, Tree& t)
 
 void OutTree(std::ofstream& outfile, Tree t)
 {
-	outfile << "Ýòî äåðåâî, ";
+	outfile << "Ð­Ñ‚Ð¾ Ð´ÐµÑ€ÐµÐ²Ð¾, ";
 
-	outfile << "åìó " << t.year << " ëåò, ";
+	outfile << "ÐµÐ¼Ñƒ " << t.year << " Ð»ÐµÑ‚, ";
 
-	outfile << "Åãî íàçâàíèå: " << t.name << "\n";
+	outfile << "Ð•Ð³Ð¾ Ð½Ð°Ð·Ð²Ð°Ð½Ð¸Ðµ: " << t.name << "\n";
 }
