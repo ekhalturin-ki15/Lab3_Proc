@@ -6,8 +6,9 @@
 #include "RingList.h"
 #include "Bush.h"
 #include "Tree.h"
+#include "Flower.h"
 
-enum Type { tree, bush };
+enum Type { tree, bush, flower };
 
 struct Plant
 {
@@ -16,6 +17,7 @@ struct Plant
 	{
 		Bush b;
 		Tree t;
+		Flower f;
 	};
 	Plant() {};
 	~Plant() {};
@@ -30,6 +32,9 @@ struct Plant
 			break;
 		case Type::bush:
 			b = object.b;
+			break;
+		case Type::flower:
+			f = object.f;
 			break;
 		}
 		return *this;

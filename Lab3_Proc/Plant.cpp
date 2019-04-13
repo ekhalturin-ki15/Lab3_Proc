@@ -27,6 +27,9 @@ void GetFlower(std::ifstream& infile, int type, Plant& object)
 	case Type::bush:
 		InBush(infile, object.b);
 		break;
+	case Type::flower:
+		InFlower(infile, object.f);
+		break;
 	}
 
 }
@@ -43,6 +46,9 @@ void OutAll(std::ofstream& outfile, RingList<Plant> container)
 			break;
 		case Type::bush:
 			OutBush(outfile, it->data.b);
+			break;
+		case Type::flower:
+			OutFlower(outfile, it->data.f);
 			break;
 		}
 		it = it->next;
