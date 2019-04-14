@@ -16,3 +16,5 @@ struct Bush
 
 void InBush(std::ifstream& infile, Bush& b);
 void OutBush(std::ofstream& outfile, Bush b);
+
+int BushAmount(Bush b);

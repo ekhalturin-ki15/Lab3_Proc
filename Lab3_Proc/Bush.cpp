@@ -1,4 +1,5 @@
 ﻿#include "Bush.h"
+#include <set>
 
 void InBush(std::ifstream& infile, Bush& b)
 {
@@ -12,6 +13,7 @@ void InBush(std::ifstream& infile, Bush& b)
 
 void OutBush(std::ofstream& outfile, Bush b)
 {
+	outfile << "Кол-во согласных в названии = " << BushAmount(b) << " ; ";
 
 	outfile << "Это кустарник, ";
 
@@ -36,4 +38,17 @@ void OutBush(std::ofstream& outfile, Bush b)
 	}
 	outfile << std::endl;
 
+}
+
+int BushAmount(Bush b)
+{
+	int all = 0;
+	std::set<char> gl = { 'а', 'о', 'и', 'е', 'ё', 'э', 'ы', 'у', 'ю', 'я' };
+	std::string name = b.name;
+
+	for (auto it : name)
+		if (!gl.count(tolower(it)))
+			all++;
+
+	return all;
 }
