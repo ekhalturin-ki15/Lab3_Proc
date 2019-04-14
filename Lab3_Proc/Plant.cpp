@@ -52,6 +52,7 @@ void OutAll(std::ofstream& outfile, RingList<Plant> container, bool filter)
 			OutBush(outfile, it->data.b);
 			break;
 		case Type::flower:
+			if (filter) break;
 			OutFlower(outfile, it->data.f);
 			break;
 		}
@@ -114,6 +115,11 @@ int cmp(Plant* l, Plant* r)
 			break;
 		case Type::bush:
 			value.push_back(BushAmount(v[i]->b));
+
+			break;
+
+		case Type::flower:
+			value.push_back(FlowerAmount(v[i]->f));
 
 			break;
 		}
