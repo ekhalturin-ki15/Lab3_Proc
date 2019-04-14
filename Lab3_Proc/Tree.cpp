@@ -28,6 +28,8 @@ void OutTree(std::ofstream& outfile, Tree t)
 	{
 		outfile << "; Местность введенна некорректно";
 	}
+	outfile << std::endl;
+
 }
 
 int TreeAmount(Tree t)
