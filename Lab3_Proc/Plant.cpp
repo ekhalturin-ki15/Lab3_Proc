@@ -24,9 +24,7 @@ void GetFlower(ifstream& infile, int type, Plant& object)
 {
 	object.key = static_cast<Type> (type - 1);
 	string s;
-	infile >> s;
-	if (s.length() < 20)
-		strcpy_s(object.name, s.c_str());
+	
 
 	switch (object.key)
 	{
@@ -40,7 +38,9 @@ void GetFlower(ifstream& infile, int type, Plant& object)
 		InFlower(infile, object.f);
 		break;
 	}
-
+	infile >> s >> object.WIG;
+	if (s.length() < 20)
+		strcpy_s(object.name, s.c_str());
 }
 
 void OutAll(std::ofstream& outfile, RingList<Plant> container, bool filter)
@@ -64,7 +64,7 @@ void OutAll(std::ofstream& outfile, RingList<Plant> container, bool filter)
 			break;
 		}
 
-		OutName(outfile, it->data);
+		if ((!filter) || (it->data.key== Type::tree)) OutName(outfile, it->data);
 
 		it = it->next;
 	}
@@ -86,13 +86,14 @@ void Sort(RingList<Plant>& container)
 void QSort(vector<ElementRL<Plant>*>& mass, int l, int r)
 {
 	int i = l, j = r;
-	Plant* p = &(mass[(l + r) / 2]->data);
+	Plant p;
+	p = mass[(l + r) / 2]->data;
 	while (true)
 	{
 
-		while (cmp(p, &(mass[i]->data)) == 1) i++;
+		while (Cmp(&p, &(mass[i]->data))) i++;
 
-		while (cmp(p, &(mass[j]->data)) == -1) j--;
+		while (Cmp(&(mass[j]->data),&p)) j--;
 
 		if (i <= j)
 		{
@@ -111,7 +112,7 @@ void QSort(vector<ElementRL<Plant>*>& mass, int l, int r)
 	if (i < r) QSort(mass, i, r); //then QuickSort(i, r);
 }
 
-int cmp(Plant* l, Plant* r)
+bool Cmp(Plant* l, Plant* r)
 {
 	vector<Plant*> v; v.push_back(l); v.push_back(r);
 	vector<int> value;
@@ -120,9 +121,7 @@ int cmp(Plant* l, Plant* r)
 		value.push_back(Amount(*v[i]));
 	}
 
-	if (value[0] > value[1]) return 1;
-	if (value[0] < value[1]) return -1;
-	return 0;
+	return (value[0] > value[1]);
 }
 
 
@@ -141,6 +140,15 @@ int Amount(Plant& object)
 
 void OutName(std::ofstream& outfile, Plant& plant)
 {
+	if ((1 <= plant.WIG) && (plant.WIG <= whereItGrows.size()))
+	{
+		outfile << "; Растёт в " << whereItGrows[plant.WIG - 1];
+	}
+	else
+	{
+		outfile << "; Местность введенна некорректно";
+	}
+
 	outfile << " Его название = " << plant.name << " ; ";
 	outfile << "Кол-во согласных в названии = " << Amount(plant);
 	outfile << std::endl;

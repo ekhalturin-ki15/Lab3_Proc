@@ -3,7 +3,7 @@
 
 void InBush(std::ifstream& infile, Bush& b)
 {
-	infile >> b.month >> b.WIG;
+	infile >> b.month;
 }
 
 
@@ -21,15 +21,6 @@ void OutBush(std::ofstream& outfile, Bush b)
 	else
 	{
 		outfile << "месяц цветения считался некорректно";
-	}
-
-	if ((1 <= b.WIG) && (b.WIG <= BwhereItGrows.size()))
-	{
-		outfile << "; Растёт в " << BwhereItGrows[b.WIG - 1];
-	}
-	else
-	{
-		outfile << "; Местность введенна некорректно";
 	}
 
 }

@@ -54,9 +54,6 @@ int main(int amount, char* param[])
 	std::cout << "Контейнер очищен" << std::endl << "количество объектов: " << container.WatAmount() << std::endl;
 
 	OutAll(outfile, container);
-	OutAll(outfile, container);
-	OutAll(outfile, container);
-	OutAll(outfile, container);
 
 	std::cout << "Финиш" << std::endl;
 

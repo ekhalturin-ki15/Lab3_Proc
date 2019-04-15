@@ -7,13 +7,11 @@
 using namespace std;
 
 const std::vector<std::string> watIsType = { "домашние", "садовые", "дикие", "редкие", "горные" };
-const std::vector<std::string> FwhereItGrows = { "тундре", "пустыни", "степи", "арктике" };
 
 struct Flower
 {
 public:
 	int type;
-	int WIG;
 };
 
 void InFlower(std::ifstream& infile, Flower& f);

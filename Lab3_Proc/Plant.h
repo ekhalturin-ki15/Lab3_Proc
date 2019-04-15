@@ -9,11 +9,13 @@
 #include "Flower.h"
 
 enum Type { tree, bush, flower };
+const std::vector<std::string> whereItGrows = { "тундре", "пустыни", "степи", "арктике" };
 
 struct Plant
 {
 	Type key;
 	char name[20];
+	int WIG;
 	union
 	{
 		Bush b;
@@ -25,6 +27,7 @@ struct Plant
 	Plant(const Plant& f) {};
 	Plant& operator= (const Plant& object)
 	{
+		WIG = object.WIG;
 		key = object.key;
 		strcpy_s(name,object.name);
 		switch (object.key)
@@ -53,7 +56,7 @@ void Sort(RingList<Plant>& container);
 
 void QSort(std::vector<ElementRL<Plant>*>& mass, int l, int r);
 
-int cmp(Plant* l, Plant* r);
+bool Cmp(Plant* l, Plant* r);
 
 int Amount(Plant& object);
 

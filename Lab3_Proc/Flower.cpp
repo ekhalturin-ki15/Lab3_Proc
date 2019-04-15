@@ -3,9 +3,8 @@
 
 void InFlower(std::ifstream& infile, Flower& f)
 {
-	infile >> f.type >> f.WIG;
-	//if (s.length() < 20)
-	//	strcpy_s(f.name, s.c_str());
+	infile >> f.type;
+
 }
 
 
@@ -21,15 +20,6 @@ void OutFlower(std::ofstream& outfile, Flower f)
 	else
 	{
 		outfile << "тип считался некорректно";
-	}
-
-	if ((1 <= f.WIG) && (f.WIG <= FwhereItGrows.size()))
-	{
-		outfile << "; Растёт в " << FwhereItGrows[f.WIG - 1];
-	}
-	else
-	{
-		outfile << "; Местность введенна некорректно";
 	}
 }
 
