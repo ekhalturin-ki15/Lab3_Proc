@@ -3,7 +3,7 @@
 #include <string>
 #include "Plant.h"
 
-const int StandartInpAtr = 3;
+const int STAND_AMOUNT_ARG = 3;
 
 
 int main(int amount, char* param[])
@@ -14,7 +14,7 @@ int main(int amount, char* param[])
 	std::ifstream infile;
 	std::ofstream outfile;
 
-	if (amount == StandartInpAtr)
+	if (amount == STAND_AMOUNT_ARG)
 	{
 		infile.open(param[1]);
 		outfile.open(param[2]);
