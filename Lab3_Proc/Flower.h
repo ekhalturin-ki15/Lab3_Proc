@@ -1,4 +1,4 @@
-#pragma once
+п»ї#pragma once
 
 #include <string>
 #include <vector>
@@ -6,7 +6,7 @@
 
 using namespace std;
 
-const std::vector<std::string> watIsType = { "домашние", "садовые", "дикие", "редкие", "горные" };
+const std::vector<std::string> watIsType = { "РґРѕРјР°С€РЅРёРµ", "СЃР°РґРѕРІС‹Рµ", "РґРёРєРёРµ", "СЂРµРґРєРёРµ", "РіРѕСЂРЅС‹Рµ" };
 
 struct Flower
 {

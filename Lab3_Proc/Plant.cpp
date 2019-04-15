@@ -22,11 +22,11 @@ void InAll(ifstream& infile, RingList<Plant>& container)
 
 void GetFlower(ifstream& infile, int type, Plant& object)
 {
-	object.key = static_cast<Type> (type - 1);
+	object.KEY = static_cast<Type> (type - 1);
 	string s;
 	
 
-	switch (object.key)
+	switch (object.KEY)
 	{
 	case Type::tree:
 		InTree(infile, object.t);
@@ -49,7 +49,7 @@ void OutAll(std::ofstream& outfile, RingList<Plant> container, bool filter)
 	
 	for (int i = 0; i < container.WatAmount(); i++)
 	{
-		switch (it->data.key)
+		switch (it->data.KEY)
 		{
 		case Type::tree:
 			OutTree(outfile, it->data.t);
@@ -64,7 +64,7 @@ void OutAll(std::ofstream& outfile, RingList<Plant> container, bool filter)
 			break;
 		}
 
-		if ((!filter) || (it->data.key== Type::tree)) OutName(outfile, it->data);
+		if ((!filter) || (it->data.KEY == Type::tree)) OutName(outfile, it->data);
 
 		it = it->next;
 	}

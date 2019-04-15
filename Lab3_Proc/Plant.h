@@ -13,7 +13,7 @@ const std::vector<std::string> whereItGrows = { "тундре", "пустыни"
 
 struct Plant
 {
-	Type key;
+	Type KEY;
 	char name[20];
 	int WIG;
 	union
@@ -28,9 +28,9 @@ struct Plant
 	Plant& operator= (const Plant& object)
 	{
 		WIG = object.WIG;
-		key = object.key;
+		KEY = object.KEY;
 		strcpy_s(name,object.name);
-		switch (object.key)
+		switch (object.KEY)
 		{
 		case Type::tree:
 			t = object.t;

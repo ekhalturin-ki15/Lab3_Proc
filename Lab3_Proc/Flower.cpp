@@ -1,4 +1,4 @@
-#include "Flower.h"
+ï»¿#include "Flower.h"
 #include <set>
 
 void InFlower(std::ifstream& infile, Flower& f)
@@ -11,15 +11,15 @@ void InFlower(std::ifstream& infile, Flower& f)
 
 void OutFlower(std::ofstream& outfile, Flower f)
 {
-	outfile << "Ýòî öâåòîê, ";
+	outfile << "Ð­Ñ‚Ð¾ Ñ†Ð²ÐµÑ‚Ð¾Ðº, ";
 
 	if (1 <= f.type && f.type <= watIsType.size())
 	{
-		outfile << "òèï öâåòêà - " << watIsType[f.type - 1];
+		outfile << "Ñ‚Ð¸Ð¿ Ñ†Ð²ÐµÑ‚ÐºÐ° - " << watIsType[f.type - 1];
 	}
 	else
 	{
-		outfile << "òèï ñ÷èòàëñÿ íåêîððåêòíî";
+		outfile << "Ñ‚Ð¸Ð¿ ÑÑ‡Ð¸Ñ‚Ð°Ð»ÑÑ Ð½ÐµÐºÐ¾Ñ€Ñ€ÐµÐºÑ‚Ð½Ð¾";
 	}
 }
 
