@@ -13,6 +13,7 @@ enum Type { tree, bush, flower };
 struct Plant
 {
 	Type key;
+	char name[20];
 	union
 	{
 		Bush b;
@@ -25,6 +26,7 @@ struct Plant
 	Plant& operator= (const Plant& object)
 	{
 		key = object.key;
+		strcpy_s(name,object.name);
 		switch (object.key)
 		{
 		case Type::tree:
@@ -52,3 +54,7 @@ void Sort(RingList<Plant>& container);
 void QSort(std::vector<ElementRL<Plant>*>& mass, int l, int r);
 
 int cmp(Plant* l, Plant* r);
+
+int Amount(Plant& object);
+
+void OutName(std::ofstream& outfile, Plant& plant);

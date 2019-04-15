@@ -12,12 +12,9 @@ const std::vector<std::string> FwhereItGrows = { "тундре", "пустыни", "степи", "
 struct Flower
 {
 public:
-	char name[20];
 	int type;
 	int WIG;
 };
 
 void InFlower(std::ifstream& infile, Flower& f);
 void OutFlower(std::ofstream& outfile, Flower f);
-
-int FlowerAmount(Flower f);
