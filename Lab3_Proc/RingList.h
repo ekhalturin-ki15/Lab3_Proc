@@ -20,6 +20,7 @@ public:
 
 	RingList();
 
+	~RingList();
 
 	// Положить в конец
 	void PushBack(DataRL& object);
@@ -31,16 +32,12 @@ public:
 	////Удалить
 	void Clear();
 
-
 	int WatAmount();
-
 
 
 private:
 
 	ElementRL<DataRL>* start;
-	ElementRL<DataRL>* end;
-	ElementRL<DataRL>* now; // Для постепенного вывода 
 	int amountEl;
 
 };
@@ -55,9 +52,13 @@ RingList<DataRL>::RingList()
 {
 
 	start = 0;
-	end = 0;
-	now = 0;
 	amountEl = 0;
+}
+
+template <typename  DataRL>
+RingList<DataRL>::~RingList()
+{
+	Clear();
 }
 
 template <typename  DataRL>
@@ -78,12 +79,12 @@ void RingList<DataRL>::PushBack(DataRL& object)
 
 	if (start)
 	{
-		end->next = newEl;
-		newEl->prev = end;
+		start->prev->next = newEl;
+		newEl->prev = start->prev;
 		newEl->next = start;
 		newEl->data = object;
-		end = newEl;
-		start->prev = end;
+		start->prev = newEl;
+		start->prev = start->prev;
 	}
 	else
 	{
@@ -91,7 +92,6 @@ void RingList<DataRL>::PushBack(DataRL& object)
 		start->next = start;
 		start->prev = start;
 		start->data = object;
-		end = start;
 	}
 	this->amountEl++;
 }
@@ -114,8 +114,6 @@ void RingList<DataRL>::Clear()
 
 	amountEl = 0;
 	start = 0;
-	end = 0;
-	now = 0;
 }
 
 template <typename  DataRL>

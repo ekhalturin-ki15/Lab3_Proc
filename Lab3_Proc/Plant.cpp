@@ -43,7 +43,7 @@ void GetFlower(ifstream& infile, int type, Plant& object)
 		strcpy_s(object.name, s.c_str());
 }
 
-void OutAll(std::ofstream& outfile, RingList<Plant> container, bool filter)
+void OutAll(std::ofstream& outfile, RingList<Plant>& container, bool filter)
 {
 	ElementRL<Plant>* it = container.begin();
 	
@@ -85,6 +85,7 @@ void Sort(RingList<Plant>& container)
 
 void QSort(vector<ElementRL<Plant>*>& mass, int l, int r)
 {
+	if (l >= r) return;
 	int i = l, j = r;
 	Plant p;
 	p = mass[(l + r) / 2]->data;
@@ -108,8 +109,8 @@ void QSort(vector<ElementRL<Plant>*>& mass, int l, int r)
 		if (i > j) break;
 	}
 
-	if (l < j) QSort(mass, l, j); //then QuickSort(l, j);
-	if (i < r) QSort(mass, i, r); //then QuickSort(i, r);
+	QSort(mass, l, j); //then QuickSort(l, j);
+	QSort(mass, i, r); //then QuickSort(i, r);
 }
 
 bool Cmp(Plant* l, Plant* r)

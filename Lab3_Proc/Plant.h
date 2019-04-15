@@ -50,7 +50,7 @@ struct Plant
 
 void InAll(std::ifstream& infile, RingList<Plant>& container);
 void GetFlower(std::ifstream& infile, int type, Plant& object);
-void OutAll(std::ofstream& outfile, RingList<Plant> container, bool filter = false);
+void OutAll(std::ofstream& outfile, RingList<Plant>& container, bool filter = false);
 
 void Sort(RingList<Plant>& container);
 
