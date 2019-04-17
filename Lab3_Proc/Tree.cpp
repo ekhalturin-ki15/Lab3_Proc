@@ -1,17 +1,21 @@
 ﻿#include "Tree.h"
 #include <set>
+#include <sstream>
 
-void InTree(std::ifstream& infile, Tree& t)
+void InTree(std::stringstream& stream, Tree& t)
 {
-	infile >> t.year;
+	t.year = 0;
+	stream >> t.year;
 
 }
 
 
-void OutTree(std::ofstream& outfile, Tree t)
+bool OutTree(std::ofstream& outfile, Tree t)
 {
 	outfile << "Это дерево, ";
 
 	outfile << "ему " << t.year << " лет, ";
+
+	return true;
 
 }

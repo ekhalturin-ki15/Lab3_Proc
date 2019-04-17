@@ -1,10 +1,11 @@
 ﻿#include "Flower.h"
 #include <set>
+#include <sstream>
 
-void InFlower(std::ifstream& infile, Flower& f)
+void InFlower(std::stringstream& stream, Flower& f)
 {
-	infile >> f.type;
-
+	f.type = 0;
+	stream >> f.type;
 }
 
 

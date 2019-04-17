@@ -11,5 +11,5 @@ struct Bush
 	int month;
 };
 
-void InBush(std::ifstream& infile, Bush& b);
+void InBush(std::stringstream& stream, Bush& b);
 void OutBush(std::ofstream& outfile, Bush b);

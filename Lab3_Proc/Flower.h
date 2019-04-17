@@ -14,5 +14,5 @@ public:
 	int type;
 };
 
-void InFlower(std::ifstream& infile, Flower& f);
+void InFlower(std::stringstream& stream, Flower& f);
 void OutFlower(std::ofstream& outfile, Flower f);

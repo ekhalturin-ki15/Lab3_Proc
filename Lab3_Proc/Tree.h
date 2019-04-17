@@ -9,6 +9,5 @@ struct Tree
 	__int64 year;
 };
 
-void InTree(std::ifstream& infile, Tree& t);
-
-void OutTree(std::ofstream& outfile, Tree t);
+void InTree(std::stringstream& stream, Tree& t);
+bool OutTree(std::ofstream& outfile, Tree t);

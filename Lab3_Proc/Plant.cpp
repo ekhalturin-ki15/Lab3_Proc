@@ -2,48 +2,53 @@
 #include "Tree.h"
 #include "Bush.h"
 #include <set>
+#include <sstream>
 
 using namespace std;
 
 void InAll(ifstream& infile, RingList<Plant>& container)
 {
-	int type;
-
-	while (true)
+	string line;
+	while (getline(infile, line))
 	{
-		type = 0;
-		infile >> type;
-		if (!type) break;
 		Plant object;
-		GetFlower(infile, type, object);
+		GetFlower(line, object);
 		container.PushBack(object);
 	}
 }
 
-void GetFlower(ifstream& infile, int type, Plant& object)
+bool GetFlower(string line, Plant& object)
 {
+	stringstream stream;
+	stream.str(line);
+
+	int type;
+	stream >> type;
 	object.KEY = static_cast<Type> (type - 1);
 	string s;
-	
 
 	switch (object.KEY)
 	{
 	case Type::tree:
-		InTree(infile, object.t);
+		InTree(stream, object.t);
 		break;
 	case Type::bush:
-		InBush(infile, object.b);
+		InBush(stream, object.b);
 		break;
 	case Type::flower:
-		InFlower(infile, object.f);
+		InFlower(stream, object.f);
 		break;
+	default:
+		return false;
 	}
-	infile >> s >> object.WIG;
-	if (s.length() < 20)
+	stream >> s >> object.WIG;
+	if (s.length() < MLEN)
 		strcpy_s(object.name, s.c_str());
+
+	return true;
 }
 
-void OutAll(std::ofstream& outfile, RingList<Plant>& container, bool filter)
+bool OutAll(std::ofstream& outfile, RingList<Plant>& container, bool filter)
 {
 	ElementRL<Plant>* it = container.begin();
 	
@@ -68,6 +73,8 @@ void OutAll(std::ofstream& outfile, RingList<Plant>& container, bool filter)
 
 		it = it->next;
 	}
+
+	return true;
 }
 
 void Sort(RingList<Plant>& container)
@@ -83,18 +90,18 @@ void Sort(RingList<Plant>& container)
 	QSort(mass, 0, mass.size() - 1);
 }
 
-void QSort(vector<ElementRL<Plant>*>& mass, int l, int r)
+bool QSort(vector<ElementRL<Plant>*>& mass, int l, int r)
 {
-	if (l >= r) return;
+	if (l >= r) return true;
 	int i = l, j = r;
-	Plant p;
-	p = mass[(l + r) / 2]->data;
+	string p;
+	p = mass[(l + r) / 2]->data.name;
 	while (true)
 	{
 
-		while (Cmp(&p, &(mass[i]->data))) i++;
+		while (Cmp(p, (mass[i]->data.name))) i++;
 
-		while (Cmp(&(mass[j]->data),&p)) j--;
+		while (Cmp((mass[j]->data.name),p)) j--;
 
 		if (i <= j)
 		{
@@ -111,35 +118,50 @@ void QSort(vector<ElementRL<Plant>*>& mass, int l, int r)
 
 	QSort(mass, l, j); //then QuickSort(l, j);
 	QSort(mass, i, r); //then QuickSort(i, r);
+
+	return true;
 }
 
-bool Cmp(Plant* l, Plant* r)
+bool Cmp(string l, string r)
 {
-	vector<Plant*> v; v.push_back(l); v.push_back(r);
+	vector<string> v; v.push_back(l); v.push_back(r);
 	vector<int> value;
 	for (int i = 0; i < 2; i++)
 	{
-		value.push_back(Amount(*v[i]));
+		value.push_back(Amount(v[i]));
 	}
 
 	return (value[0] > value[1]);
 }
 
 
-int Amount(Plant& object)
+int Amount(string name)
 {
 	int all = 0;
-	std::set<char> gl = { 'а', 'о', 'и', 'е', 'ё', 'э', 'ы', 'у', 'ю', 'я' };
-	std::string name = object.name;
+	std::vector<char> bad = { 'а', 'о', 'и', 'е', 'ё', 'э', 'ы', 'у', 'ю', 'я' , 'ъ', 'ь', 'ы'}; //Исправил
+	std::set<char> consonant;
+	for (char ch = 'а'; ch <= 'п'; ch++) consonant.insert(ch);
+	for (char ch = 'р'; ch <= 'я'; ch++) consonant.insert(ch);
+	for (auto it : bad) consonant.erase(it);
 
 	for (auto it : name)
-		if (!gl.count(tolower(it)))
+	{
+		if (consonant.count(MyTolower(it)))
 			all++;
+	}
 
 	return all;
 }
 
-void OutName(std::ofstream& outfile, Plant& plant)
+char MyTolower(char ch)
+{
+	if ((ch >= 'А') && (ch <= 'П')) return ch - 'А' + 'а';
+	if ((ch >= 'Р') && (ch <= 'Я')) return ch - 'Р' + 'р';
+	if (ch == 'Ё') return 'ё';
+	return ch;
+}
+
+bool OutName(std::ofstream& outfile, Plant& plant)
 {
 	if ((1 <= plant.WIG) && (plant.WIG <= whereItGrows.size()))
 	{
@@ -151,6 +173,7 @@ void OutName(std::ofstream& outfile, Plant& plant)
 	}
 
 	outfile << " Его название = " << plant.name << " ; ";
-	outfile << "Кол-во согласных в названии = " << Amount(plant);
+	outfile << "Кол-во согласных в названии = " << Amount(plant.name);
 	outfile << std::endl;
+	return true;
 }

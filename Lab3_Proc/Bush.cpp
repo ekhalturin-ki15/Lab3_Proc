@@ -1,9 +1,11 @@
 ﻿#include "Bush.h"
 #include <set>
+#include <sstream>
 
-void InBush(std::ifstream& infile, Bush& b)
+void InBush(std::stringstream& stream, Bush& b)
 {
-	infile >> b.month;
+	b.month = 0;
+	stream >> b.month;
 }
 
 

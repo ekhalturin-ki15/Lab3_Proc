@@ -10,12 +10,13 @@
 
 enum Type { tree, bush, flower };
 const std::vector<std::string> whereItGrows = { "тундре", "пустыни", "степи", "арктике" };
+const int MLEN = 19;
 
 struct Plant
 {
-	Type KEY;
-	char name[20];
-	int WIG;
+	Type KEY = Type::tree;
+	char name[MLEN+1];
+	int WIG = 0;
 	union
 	{
 		Bush b;
@@ -49,15 +50,17 @@ struct Plant
 };
 
 void InAll(std::ifstream& infile, RingList<Plant>& container);
-void GetFlower(std::ifstream& infile, int type, Plant& object);
-void OutAll(std::ofstream& outfile, RingList<Plant>& container, bool filter = false);
+bool GetFlower(string line, Plant& object);
+bool OutAll(std::ofstream& outfile, RingList<Plant>& container, bool filter = false);
 
 void Sort(RingList<Plant>& container);
 
-void QSort(std::vector<ElementRL<Plant>*>& mass, int l, int r);
+bool QSort(std::vector<ElementRL<Plant>*>& mass, int l, int r);
 
-bool Cmp(Plant* l, Plant* r);
+bool Cmp(std::string l, std::string r);
 
-int Amount(Plant& object);
+int Amount(std::string name);
 
-void OutName(std::ofstream& outfile, Plant& plant);
+bool OutName(std::ofstream& outfile, Plant& plant);
+
+char MyTolower(char ch);
