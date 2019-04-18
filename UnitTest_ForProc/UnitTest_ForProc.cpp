@@ -118,53 +118,53 @@ namespace PlantTest
 
 	};
 
-	TEST_CLASS(TestGetFlower)
+	TEST_CLASS(TestGetPlant)
 	{
 	public:
 		TEST_METHOD(CrushTest)
 		{
 			Plant object;
-			Assert::IsFalse(GetFlower("800 100 НеСуществуетКласс 10", object));
+			Assert::IsFalse(GetPlant("800 100 НеСуществуетКласс 10", object));
 		}
 
 		TEST_METHOD(CrushTest2)
 		{
 			Plant object;
-			Assert::IsFalse(GetFlower("-800 100 НеСуществуетКласс 10", object));
+			Assert::IsFalse(GetPlant("-800 100 НеСуществуетКласс 10", object));
 		}
 
 		TEST_METHOD(EmptyTest)
 		{
 			Plant object;
-			Assert::IsFalse(GetFlower("", object));
+			Assert::IsFalse(GetPlant("", object));
 		}
 
 		TEST_METHOD(EmptyTestTree)
 		{
 			Plant object;
 			long long l = 0;
-			GetFlower("1 ", object);
+			GetPlant("1 ", object);
 			Assert::IsTrue(l == object.t.year);
 		}
 
 		TEST_METHOD(EmptyTestBush)
 		{
 			Plant object;
-			GetFlower("2 ", object);
+			GetPlant("2 ", object);
 			Assert::AreEqual(0, object.b.month);
 		}
 
 		TEST_METHOD(EmptyTestFlower)
 		{
 			Plant object;
-			GetFlower("3 ", object);
+			GetPlant("3 ", object);
 			Assert::AreEqual(0, object.f.type);
 		}
 
 		TEST_METHOD(EmptyTest2)
 		{
 			Plant object;
-			GetFlower("2 ", object);
+			GetPlant("2 ", object);
 			Assert::IsTrue("" == string(object.name));
 		}
 	};
@@ -181,6 +181,7 @@ namespace PlantTest
 
 		TEST_METHOD(EmptyTest)
 		{
+			RingList<Plant> container;
 			OutAll(outfile, container);
 			outfile.close();
 			getline(infile, line);
@@ -189,6 +190,7 @@ namespace PlantTest
 
 		TEST_METHOD(EmptyTest2)
 		{
+			RingList<Plant> container;
 			OutAll(outfile, container, true);
 			outfile.close();
 			getline(infile, line);
@@ -197,8 +199,9 @@ namespace PlantTest
 
 		TEST_METHOD(TestWithoutFilter)
 		{
+			RingList<Plant> container;
 			Plant object;
-			GetFlower("2 100 НеДревко 5", object);
+			GetPlant("2 100 НеДревко 5", object);
 			container.PushBack(object);
 			OutAll(outfile, container);
 			outfile.close();
@@ -212,8 +215,9 @@ namespace PlantTest
 
 		TEST_METHOD(TestWithInFilter)
 		{
+			RingList<Plant> container;
 			Plant object;
-			GetFlower("2 100 НеДревко 5", object);
+			GetPlant("2 100 НеДревко 5", object);
 			container.PushBack(object);
 			OutAll(outfile, container, true);
 			outfile.close();
@@ -225,7 +229,6 @@ namespace PlantTest
 		ofstream outfile;
 		ifstream infile;
 		string line;
-		RingList<Plant> container;
 	};
 
 	TEST_CLASS(TestSort)
@@ -338,31 +341,18 @@ namespace PlantTest
 		}
 		TEST_METHOD(EmptyTestTree)
 		{
-			OutName(outfile, tree);
+			string line;	
+			OutName(outfile, plant);
 			outfile.close();
 			getline(infile, line);
 			Assert::IsTrue(answer == line);
 		}
-		TEST_METHOD(EmptyTestBush)
-		{
-			OutName(outfile, bush);
-			outfile.close();
-			getline(infile, line);
-			Assert::IsTrue(answer == line);
-		}
-		TEST_METHOD(EmptyTestFlower)
-		{
-			OutName(outfile, flower);
-			outfile.close();
-			getline(infile, line);
-			Assert::IsTrue(answer == line);
-		}
+		
 	private:
 		ofstream outfile;
 		ifstream infile;
-		string line;
+		Plant plant;
 		const string answer = "; Местность введенна некорректно Его название =  ; Кол-во согласных в названии = 0";
-		Plant tree, bush, flower;
 	};
 }
 
@@ -375,6 +365,7 @@ namespace TreeTest
 
 		TEST_METHOD(EmptyTree)
 		{
+			stringstream stream;
 			stream.str("");
 			InTree(stream, tree);
 			long long zero = 0;
@@ -383,14 +374,14 @@ namespace TreeTest
 
 		TEST_METHOD(Test)
 		{
+			stringstream stream;
 			stream.str("100 Привет 4");
 			InTree(stream, tree);
 			long long n = 100;
 			Assert::IsTrue(n == tree.year);
 		}
 
-	private:
-		stringstream stream;
+	private:	
 		Tree tree;
 	};
 
@@ -437,6 +428,7 @@ namespace BushTest
 
 		TEST_METHOD(EmptyBush)
 		{
+			stringstream stream;
 			stream.str("");
 			InBush(stream, bush);
 			Assert::IsTrue(0 == bush.month);
@@ -444,13 +436,13 @@ namespace BushTest
 
 		TEST_METHOD(Test)
 		{
+			stringstream stream;
 			stream.str("12 Январь -900");
 			InBush(stream, bush);
 			Assert::IsTrue(12 == bush.month);
 		}
 
 	private:
-		stringstream stream;
 		Bush bush;
 	};
 
@@ -497,6 +489,7 @@ namespace FlowerTest
 
 		TEST_METHOD(EmptyFlower)
 		{
+			stringstream stream;
 			stream.str("");
 			InFlower(stream, flower);
 			Assert::IsTrue(0 == flower.type);
@@ -504,13 +497,13 @@ namespace FlowerTest
 
 		TEST_METHOD(Test)
 		{
+			stringstream stream;
 			stream.str("5 горные -100");
 			InFlower(stream, flower);
 			Assert::IsTrue(5 == flower.type);
 		}
 
-	private:
-		stringstream stream;
+	private:		
 		Flower flower;
 	};
 

@@ -15,7 +15,7 @@ const int MLEN = 19;
 struct Plant
 {
 	Type KEY = Type::tree;
-	char name[MLEN+1];
+	char name[MLEN+1] = "";
 	int WIG = 0;
 	union
 	{
@@ -50,7 +50,7 @@ struct Plant
 };
 
 void InAll(std::ifstream& infile, RingList<Plant>& container);
-bool GetFlower(string line, Plant& object);
+bool GetPlant(string line, Plant& object);
 bool OutAll(std::ofstream& outfile, RingList<Plant>& container, bool filter = false);
 
 void Sort(RingList<Plant>& container);

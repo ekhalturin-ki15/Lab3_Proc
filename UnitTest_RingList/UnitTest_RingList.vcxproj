@@ -20,9 +20,9 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
-    <ProjectGuid>{296E8F4B-EF69-40D6-9E30-B2FB4B4BF8BE}</ProjectGuid>
+    <ProjectGuid>{7BB74F96-1D7D-4D2C-BA1F-21452C6477E7}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>UnitTestForProc</RootNamespace>
+    <RootNamespace>UnitTestRingList</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
     <ProjectSubType>NativeUnitTestProject</ProjectSubType>
   </PropertyGroup>
@@ -164,7 +164,7 @@
     <ClCompile Include="..\Lab3_Proc\Flower.cpp" />
     <ClCompile Include="..\Lab3_Proc\Plant.cpp" />
     <ClCompile Include="..\Lab3_Proc\Tree.cpp" />
-    <ClCompile Include="UnitTest_ForProc.cpp" />
+    <ClCompile Include="UnitTest_RingList.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Lab3_Proc\Bush.h" />
@@ -172,10 +172,6 @@
     <ClInclude Include="..\Lab3_Proc\Plant.h" />
     <ClInclude Include="..\Lab3_Proc\RingList.h" />
     <ClInclude Include="..\Lab3_Proc\Tree.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="..\Debug\input test.txt" />
-    <Text Include="..\Debug\output test.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

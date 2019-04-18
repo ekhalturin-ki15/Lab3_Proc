@@ -12,12 +12,12 @@ void InAll(ifstream& infile, RingList<Plant>& container)
 	while (getline(infile, line))
 	{
 		Plant object;
-		GetFlower(line, object);
+		GetPlant(line, object);
 		container.PushBack(object);
 	}
 }
 
-bool GetFlower(string line, Plant& object)
+bool GetPlant(string line, Plant& object)
 {
 	stringstream stream;
 	stream.str(line);
