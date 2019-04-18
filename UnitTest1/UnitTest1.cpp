@@ -1,5 +1,4 @@
-﻿#include "pch.h"
-#include "CppUnitTest.h"
+﻿#include "CppUnitTest.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
@@ -11,6 +10,7 @@ namespace UnitTest1
 		
 		TEST_METHOD(TestMethod1)
 		{
+			Assert::AreEqual(1, 1);
 		}
 	};
 }
