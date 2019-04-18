@@ -77,7 +77,7 @@ namespace PlantTest
 	TEST_CLASS(TestInAll)
 	{
 	public:
-		
+
 		TestInAll()
 		{
 			ofstream outfile;
@@ -94,9 +94,9 @@ namespace PlantTest
 		TEST_METHOD(WatType)
 		{
 			ElementRL<Plant>* it = container.begin();
-			bool condition = true; 
+			bool condition = true;
 			int i = 0;
-			if (container.WatAmount()< MUST_A) Assert::IsTrue(false);
+			if (container.WatAmount() < MUST_A) Assert::IsTrue(false);
 			vector<Type> type;
 			for (; i < MUST_A; i++)
 			{
@@ -144,7 +144,7 @@ namespace PlantTest
 			Plant object;
 			long long l = 0;
 			GetFlower("1 ", object);
-			Assert::IsTrue(l== object.t.year);
+			Assert::IsTrue(l == object.t.year);
 		}
 
 		TEST_METHOD(EmptyTestBush)
@@ -172,7 +172,7 @@ namespace PlantTest
 	TEST_CLASS(TestOutAll)
 	{
 	public:
-		
+
 		TestOutAll()
 		{
 			outfile.open("output test.txt");
@@ -230,7 +230,7 @@ namespace PlantTest
 
 	TEST_CLASS(TestSort)
 	{
-	public:	
+	public:
 
 		TestSort()
 		{
@@ -248,7 +248,7 @@ namespace PlantTest
 		TEST_METHOD(Min)
 		{
 			Sort(container);
-			Assert::AreEqual(MIN, container.begin()->data.WIG);		
+			Assert::AreEqual(MIN, container.begin()->data.WIG);
 		}
 
 		TEST_METHOD(Max)
@@ -309,7 +309,7 @@ namespace PlantTest
 
 		TEST_METHOD(Right2)
 		{
-			Assert::IsTrue(Cmp(last ,second));
+			Assert::IsTrue(Cmp(last, second));
 		}
 
 		TEST_METHOD(Right3)
@@ -372,7 +372,7 @@ namespace TreeTest
 	TEST_CLASS(TestInTree)
 	{
 	public:
-	
+
 		TEST_METHOD(EmptyTree)
 		{
 			stream.str("");
@@ -401,7 +401,7 @@ namespace TreeTest
 		{
 			outfile.open("output test.txt");
 			infile.open("output test.txt");
-		}	
+		}
 		TEST_METHOD(EmptyTree)
 		{
 			OutTree(outfile, tree);
@@ -425,7 +425,7 @@ namespace TreeTest
 		Tree tree;
 		string line;
 	};
-	
+
 }
 
 
