@@ -1,10 +1,12 @@
 ﻿//#include "pch.h" не используем
 #include "CppUnitTest.h"
 #include "../Lab3_Proc/Plant.h"
+
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 namespace PlantTest
 {
+
 	string GetMaxName()
 	{
 		string s;
@@ -117,7 +119,7 @@ namespace PlantTest
 
 
 	};
-
+	
 	TEST_CLASS(TestGetPlant)
 	{
 	public:
@@ -142,9 +144,8 @@ namespace PlantTest
 		TEST_METHOD(EmptyTestTree)
 		{
 			Plant object;
-			long long l = 0;
 			GetPlant("1 ", object);
-			Assert::IsTrue(l == object.t.year);
+			Assert::AreEqual(0 , int(object.t.year));
 		}
 
 		TEST_METHOD(EmptyTestBush)
@@ -165,10 +166,10 @@ namespace PlantTest
 		{
 			Plant object;
 			GetPlant("2 ", object);
-			Assert::IsTrue("" == string(object.name));
+			Assert::AreEqual(string(""), string(object.name));
 		}
 	};
-
+	
 	TEST_CLASS(TestOutAll)
 	{
 	public:
@@ -185,7 +186,7 @@ namespace PlantTest
 			OutAll(outfile, container);
 			outfile.close();
 			getline(infile, line);
-			Assert::IsTrue(line == "");
+			Assert::AreEqual(string(""),line);
 		}
 
 		TEST_METHOD(EmptyTest2)
@@ -194,7 +195,7 @@ namespace PlantTest
 			OutAll(outfile, container, true);
 			outfile.close();
 			getline(infile, line);
-			Assert::IsTrue(line == "");
+			Assert::AreEqual(string(""), line);
 		}
 
 		TEST_METHOD(TestWithoutFilter)
@@ -210,7 +211,7 @@ namespace PlantTest
 			answer = "Это кустарник, месяц цветения считался некорректно; ";
 			answer += "Местность введенна некорректно Его название = НеДревко ; ";
 			answer += "Кол-во согласных в названии = 5";
-			Assert::IsTrue(line == answer);
+			Assert::AreEqual(answer, line);
 		}
 
 		TEST_METHOD(TestWithInFilter)
@@ -222,7 +223,7 @@ namespace PlantTest
 			OutAll(outfile, container, true);
 			outfile.close();
 			getline(infile, line);
-			Assert::IsTrue(line == "");
+			Assert::AreEqual(string(""), line);
 		}
 
 	private:
@@ -230,7 +231,7 @@ namespace PlantTest
 		ifstream infile;
 		string line;
 	};
-
+	
 	TEST_CLASS(TestSort)
 	{
 	public:
@@ -278,6 +279,7 @@ namespace PlantTest
 	private:
 		vector<ElementRL<Plant>*> mass;
 	};
+	
 
 	TEST_CLASS(TestCmp)
 	{
@@ -329,6 +331,7 @@ namespace PlantTest
 		string first, second, last;
 
 	};
+	
 
 	TEST_CLASS(TestOutName)
 	{
@@ -345,7 +348,7 @@ namespace PlantTest
 			OutName(outfile, plant);
 			outfile.close();
 			getline(infile, line);
-			Assert::IsTrue(answer == line);
+			Assert::AreEqual(answer, line);
 		}
 		
 	private:
@@ -354,6 +357,7 @@ namespace PlantTest
 		Plant plant;
 		const string answer = "; Местность введенна некорректно Его название =  ; Кол-во согласных в названии = 0";
 	};
+	
 }
 
 
@@ -368,8 +372,7 @@ namespace TreeTest
 			stringstream stream;
 			stream.str("");
 			InTree(stream, tree);
-			long long zero = 0;
-			Assert::IsTrue(zero == tree.year);
+			Assert::AreEqual(0, int(tree.year));
 		}
 
 		TEST_METHOD(Test)
@@ -377,13 +380,13 @@ namespace TreeTest
 			stringstream stream;
 			stream.str("100 Привет 4");
 			InTree(stream, tree);
-			long long n = 100;
-			Assert::IsTrue(n == tree.year);
+		    Assert::AreEqual(100, int(tree.year));
 		}
 
 	private:	
 		Tree tree;
 	};
+	
 
 	TEST_CLASS(TestOutTree)
 	{
@@ -398,7 +401,7 @@ namespace TreeTest
 			OutTree(outfile, tree);
 			outfile.close();
 			getline(infile, line);
-			Assert::IsTrue(line == "Это дерево, ему 0 лет, ");
+			Assert::AreEqual(string("Это дерево, ему 0 лет, "),line);
 		}
 
 		TEST_METHOD(Test)
@@ -407,7 +410,7 @@ namespace TreeTest
 			OutTree(outfile, tree);
 			outfile.close();
 			getline(infile, line);
-			Assert::IsTrue(line == "Это дерево, ему 1000000000000000000 лет, ");
+			Assert::AreEqual(string("Это дерево, ему 1000000000000000000 лет, "),line);
 		}
 
 	private:
@@ -416,7 +419,7 @@ namespace TreeTest
 		Tree tree;
 		string line;
 	};
-
+	
 }
 
 
@@ -431,7 +434,7 @@ namespace BushTest
 			stringstream stream;
 			stream.str("");
 			InBush(stream, bush);
-			Assert::IsTrue(0 == bush.month);
+			Assert::AreEqual(0 , bush.month);
 		}
 
 		TEST_METHOD(Test)
@@ -439,12 +442,13 @@ namespace BushTest
 			stringstream stream;
 			stream.str("12 Январь -900");
 			InBush(stream, bush);
-			Assert::IsTrue(12 == bush.month);
+			Assert::AreEqual(12, bush.month);
 		}
 
 	private:
 		Bush bush;
 	};
+
 
 	TEST_CLASS(TestOutBush)
 	{
@@ -459,7 +463,7 @@ namespace BushTest
 			OutBush(outfile, bush);
 			outfile.close();
 			getline(infile, line);
-			Assert::IsTrue(line == "Это кустарник, месяц цветения считался некорректно");
+			Assert::AreEqual(string("Это кустарник, месяц цветения считался некорректно"), line);
 		}
 
 		TEST_METHOD(Test)
@@ -468,7 +472,7 @@ namespace BushTest
 			OutBush(outfile, bush);
 			outfile.close();
 			getline(infile, line);
-			Assert::IsTrue(line == "Это кустарник, месяц цветения - август");
+			Assert::AreEqual(string("Это кустарник, месяц цветения - август"),line);
 		}
 
 	private:
@@ -477,7 +481,7 @@ namespace BushTest
 		Bush bush;
 		string line;
 	};
-
+	
 }
 
 
@@ -492,7 +496,7 @@ namespace FlowerTest
 			stringstream stream;
 			stream.str("");
 			InFlower(stream, flower);
-			Assert::IsTrue(0 == flower.type);
+			Assert::AreEqual(0, flower.type);
 		}
 
 		TEST_METHOD(Test)
@@ -500,12 +504,13 @@ namespace FlowerTest
 			stringstream stream;
 			stream.str("5 горные -100");
 			InFlower(stream, flower);
-			Assert::IsTrue(5 == flower.type);
+			Assert::AreEqual(5 , flower.type);
 		}
 
 	private:		
 		Flower flower;
 	};
+	
 
 	TEST_CLASS(TestOutFlower)
 	{
@@ -520,7 +525,7 @@ namespace FlowerTest
 			OutFlower(outfile, flower);
 			outfile.close();
 			getline(infile, line);
-			Assert::IsTrue(line == "Это цветок, тип считался некорректно");
+			Assert::AreEqual(string("Это цветок, тип считался некорректно"),line);
 		}
 
 		TEST_METHOD(Test)
@@ -529,7 +534,7 @@ namespace FlowerTest
 			OutFlower(outfile, flower);
 			outfile.close();
 			getline(infile, line);
-			Assert::IsTrue(line == "Это цветок, тип цветка - садовые");
+			Assert::AreEqual(string("Это цветок, тип цветка - садовые"),line);
 		}
 
 	private:

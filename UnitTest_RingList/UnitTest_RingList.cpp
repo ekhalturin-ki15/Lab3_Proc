@@ -2,6 +2,7 @@
 #include "../Lab3_Proc/Plant.h"
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
+
 namespace RingListTest
 {
 	const int MORE = 100;
@@ -24,7 +25,7 @@ namespace RingListTest
 			RingList<Plant> forPlant;
 			GetPlant("1 100 Деревко 4", object);
 			forPlant.PushBack(object);
-			Assert::IsTrue(string(forPlant.begin()->data.name) == "Деревко");
+			Assert::AreEqual(string("Деревко"),string(forPlant.begin()->data.name));
 		}
 
 		TEST_METHOD(TestPMore)
@@ -38,7 +39,7 @@ namespace RingListTest
 		{
 			RingList<Plant> forPlant;
 			GeneratePlant(forPlant);
-			Assert::IsTrue("Цветочек" == string(forPlant.begin()->prev->data.name));
+			Assert::AreEqual(string("Цветочек"),string(forPlant.begin()->prev->data.name));
 		}
 
 		TEST_METHOD(TestPIsTrueRing)
@@ -46,7 +47,7 @@ namespace RingListTest
 			RingList<Plant> forPlant;
 			GetPlant("2 1 Кустик 1", object);
 			forPlant.PushBack(object);
-			Assert::IsTrue(string(forPlant.begin()->next->prev->data.name) == "Кустик");
+			Assert::AreEqual(string("Кустик"),string(forPlant.begin()->next->prev->data.name));
 		}
 
 		TEST_METHOD(TestI)
@@ -55,7 +56,7 @@ namespace RingListTest
 			int random = rand();
 			num = random;
 			forInt.PushBack(num);
-			Assert::IsTrue(forInt.begin()->data == random);
+			Assert::AreEqual(random,forInt.begin()->data);
 		}
 		TEST_METHOD(TestIIsTrueRing)
 		{
@@ -63,7 +64,7 @@ namespace RingListTest
 			int random = rand();
 			num = random;
 			forInt.PushBack(num);
-			Assert::IsTrue(forInt.begin()->prev->next->data == random);
+			Assert::AreEqual(random,forInt.begin()->prev->next->data);
 		}
 
 	private:
@@ -77,17 +78,19 @@ namespace RingListTest
 
 		TEST_METHOD(Test1)
 		{
-			Assert::IsTrue(forPlant.begin() == 0);
+			ElementRL<Plant>* it = 0;
+			Assert::AreEqual(int(it), int(forPlant.begin() ));
 		}
 
 		TEST_METHOD(Test1_)
 		{
-			Assert::IsTrue(forPlant.WatAmount() == 0);
+			Assert::AreEqual(0, forPlant.WatAmount());
 		}
 
 		TEST_METHOD(Test2)
 		{
-			Assert::IsTrue(forInt.begin() == 0);
+			ElementRL<int>* it = 0;
+			Assert::AreEqual(int(it), int(forPlant.begin()));
 		}
 
 	private:
@@ -119,10 +122,11 @@ namespace RingListTest
 		TEST_METHOD(Test3)
 		{
 			RingList<int>	forInt;
+			ElementRL<int>* it = 0;
 			int num = MORE;
 			forInt.PushBack(num);
 			forInt.Clear();
-			Assert::IsTrue(0 == forInt.begin());
+			Assert::AreEqual(int(it),int(forInt.begin()));
 		}
 			
 	};
@@ -166,3 +170,4 @@ namespace RingListTest
 
 	
 }
+
