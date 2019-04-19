@@ -83,11 +83,13 @@ namespace PlantTest
 		TestInAll()
 		{
 			ofstream outfile;
+			ofstream bad;
 			outfile.open("input test.txt");
+			bad.open("bad.txt");
 			outfile << "1 100 Деревко 4" << endl << "2 5 Кустик 3" << endl << "3 4 Цветок 5";
 			outfile.close();
 			infile.open("input test.txt");
-			InAll(infile, container);
+			InAll(bad,infile, container);
 		}
 		TEST_METHOD(WatAmount)
 		{
@@ -123,51 +125,58 @@ namespace PlantTest
 	TEST_CLASS(TestGetPlant)
 	{
 	public:
+		TestGetPlant()
+		{
+			out.open("bad.txt");
+		}
 		TEST_METHOD(CrushTest)
 		{
 			Plant object;
-			Assert::IsFalse(GetPlant("800 100 НеСуществуетКласс 10", object));
+			Assert::IsFalse(GetPlant(out,"800 100 НеСуществуетКласс 10", object));
 		}
 
 		TEST_METHOD(CrushTest2)
 		{
 			Plant object;
-			Assert::IsFalse(GetPlant("-800 100 НеСуществуетКласс 10", object));
+			Assert::IsFalse(GetPlant(out,"-800 100 НеСуществуетКласс 10", object));
 		}
 
 		TEST_METHOD(EmptyTest)
 		{
 			Plant object;
-			Assert::IsFalse(GetPlant("", object));
+			Assert::IsFalse(GetPlant(out,"", object));
 		}
 
 		TEST_METHOD(EmptyTestTree)
 		{
 			Plant object;
-			GetPlant("1 ", object);
+			GetPlant(out,"1 ", object);
 			Assert::AreEqual(0 , int(object.t.year));
 		}
 
 		TEST_METHOD(EmptyTestBush)
 		{
 			Plant object;
-			GetPlant("2 ", object);
+			GetPlant(out,"2 ", object);
 			Assert::AreEqual(0, object.b.month);
 		}
 
 		TEST_METHOD(EmptyTestFlower)
 		{
 			Plant object;
-			GetPlant("3 ", object);
+			GetPlant(out,"3 ", object);
 			Assert::AreEqual(0, object.f.type);
 		}
 
 		TEST_METHOD(EmptyTest2)
 		{
 			Plant object;
-			GetPlant("2 ", object);
+			GetPlant(out,"2 ", object);
 			Assert::AreEqual(string(""), string(object.name));
 		}
+
+	private:
+		ofstream out;
 	};
 	
 	TEST_CLASS(TestOutAll)
@@ -202,7 +211,7 @@ namespace PlantTest
 		{
 			RingList<Plant> container;
 			Plant object;
-			GetPlant("2 100 НеДревко 5", object);
+			//GetPlant("2 100 НеДревко 5", object);
 			container.PushBack(object);
 			OutAll(outfile, container);
 			outfile.close();
@@ -218,7 +227,7 @@ namespace PlantTest
 		{
 			RingList<Plant> container;
 			Plant object;
-			GetPlant("2 100 НеДревко 5", object);
+			//GetPlant("2 100 НеДревко 5", object);
 			container.PushBack(object);
 			OutAll(outfile, container, true);
 			outfile.close();
@@ -239,7 +248,7 @@ namespace PlantTest
 		TestSort()
 		{
 			infile.open("input test.txt");
-			InAll(infile, container);
+			//InAll(infile, container);
 			Plant object;
 			strcpy_s(object.name, GetMaxName().c_str());
 			object.WIG = MAX;

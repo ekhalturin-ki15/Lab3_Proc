@@ -10,10 +10,10 @@ namespace RingListTest
 	void GeneratePlant(RingList<Plant>& MorePlant)
 	{
 		Plant object;
-		GetPlant("1 100 Деревко 4", object);
+		//GetPlant("1 100 Деревко 4", object);
 		for (int i = 1; i < MORE; i++)
 			MorePlant.PushBack(object);
-		GetPlant("3 5 Цветочек 4", object);
+		//GetPlant("3 5 Цветочек 4", object);
 		MorePlant.PushBack(object);
 	}
 
@@ -23,7 +23,7 @@ namespace RingListTest
 		TEST_METHOD(TestP)
 		{		
 			RingList<Plant> forPlant;
-			GetPlant("1 100 Деревко 4", object);
+			//GetPlant("1 100 Деревко 4", object);
 			forPlant.PushBack(object);
 			Assert::AreEqual(string("Деревко"),string(forPlant.begin()->data.name));
 		}
@@ -45,7 +45,7 @@ namespace RingListTest
 		TEST_METHOD(TestPIsTrueRing)
 		{
 			RingList<Plant> forPlant;
-			GetPlant("2 1 Кустик 1", object);
+			strcpy_s(object.name, string("Кустик").c_str());
 			forPlant.PushBack(object);
 			Assert::AreEqual(string("Кустик"),string(forPlant.begin()->next->prev->data.name));
 		}

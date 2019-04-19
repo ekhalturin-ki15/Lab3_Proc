@@ -1,50 +1,81 @@
 ﻿#include "Plant.h"
-#include "Tree.h"
-#include "Bush.h"
 #include <set>
 #include <sstream>
 
 using namespace std;
 
-void InAll(ifstream& infile, RingList<Plant>& container)
+void InAll(std::ofstream& outfile, ifstream& infile, RingList<Plant>& container)
 {
+	int watLine = 0;
 	string line;
 	while (getline(infile, line))
 	{
+		watLine++;
 		Plant object;
-		GetPlant(line, object);
-		container.PushBack(object);
+		if (GetPlant(outfile, line, object, watLine))
+			container.PushBack(object);
 	}
+	outfile << "_____________" << endl;
 }
 
-bool GetPlant(string line, Plant& object)
+bool GetPlant(std::ofstream& outfile, string line, Plant& object, int watLine)
 {
-	stringstream stream;
-	stream.str(line);
-
-	int type;
-	stream >> type;
-	object.KEY = static_cast<Type> (type - 1);
-	string s;
-
-	switch (object.KEY)
+	try
 	{
-	case Type::tree:
-		InTree(stream, object.t);
-		break;
-	case Type::bush:
-		InBush(stream, object.b);
-		break;
-	case Type::flower:
-		InFlower(stream, object.f);
-		break;
-	default:
+		stringstream stream;
+		stream.str(line);
+
+		int type;
+		stream >> type;
+		object.KEY = static_cast<Type> (type - 1);	
+		string s;
+
+		switch (object.KEY)
+		{
+
+		case Type::tree:
+			InTree(stream, object.t);
+			if (object.t.year<1)
+				throw string("Год дерева отрицательный");
+
+			break;
+
+		case Type::bush:
+			InBush(stream, object.b);
+
+			if ((1 >object.b.month) || (object.b.month > watIsMonth.size()))
+				throw string("Месяц цветения куста считался некорректно");
+
+			break;
+
+		case Type::flower:
+			InFlower(stream, object.f);
+
+			if ((1 > object.f.type) || (object.f.type > watIsType.size()))
+				outfile << "Тип цветка считался некорректно";
+
+			break;
+
+		default:
+			throw string("Тип класса " + to_string(type) + " не существует");
+		}
+
+		stream >> s >> object.WIG;
+		if (s.length() < MLEN)
+			strcpy_s(object.name, s.c_str());
+		else
+			throw string("Имя класса слишком длинное (нужно менее 20 символов)");
+
+		if ((1 > object.WIG) || (object.WIG > whereItGrows.size()))
+			throw string("Местность введена некорректно");
+
+		
+	}
+	catch (string wrong)
+	{
+		outfile << wrong<<" ; в строке номер "<<to_string(watLine) << endl;
 		return false;
 	}
-	stream >> s >> object.WIG;
-	if (s.length() < MLEN)
-		strcpy_s(object.name, s.c_str());
-
 	return true;
 }
 
@@ -161,19 +192,10 @@ char MyTolower(char ch)
 	return ch;
 }
 
-bool OutName(std::ofstream& outfile, Plant& plant)
+void OutName(std::ofstream& outfile, Plant& plant)
 {
-	if ((1 <= plant.WIG) && (plant.WIG <= whereItGrows.size()))
-	{
-		outfile << "; Растёт в " << whereItGrows[plant.WIG - 1];
-	}
-	else
-	{
-		outfile << "; Местность введенна некорректно";
-	}
-
+	outfile << "; Растёт в " << whereItGrows[plant.WIG - 1];
 	outfile << " Его название = " << plant.name << " ; ";
 	outfile << "Кол-во согласных в названии = " << Amount(plant.name);
 	outfile << std::endl;
-	return true;
 }

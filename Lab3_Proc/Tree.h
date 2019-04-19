@@ -10,4 +10,4 @@ struct Tree
 };
 
 void InTree(std::stringstream& stream, Tree& t);
-bool OutTree(std::ofstream& outfile, Tree t);
+void OutTree(std::ofstream& outfile, Tree t);

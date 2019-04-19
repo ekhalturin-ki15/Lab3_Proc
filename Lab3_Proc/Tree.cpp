@@ -10,12 +10,9 @@ void InTree(std::stringstream& stream, Tree& t)
 }
 
 
-bool OutTree(std::ofstream& outfile, Tree t)
+void OutTree(std::ofstream& outfile, Tree t)
 {
 	outfile << "Это дерево, ";
-
 	outfile << "ему " << t.year << " лет, ";
-
-	return true;
 
 }

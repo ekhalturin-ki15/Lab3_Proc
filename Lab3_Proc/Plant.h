@@ -8,7 +8,8 @@
 #include "Tree.h"
 #include "Flower.h"
 
-enum Type { tree, bush, flower };
+const enum Type { tree, bush, flower };
+const int ATYPE = 3;
 const std::vector<std::string> whereItGrows = { "тундре", "пустыни", "степи", "арктике" };
 const int MLEN = 19;
 
@@ -49,8 +50,8 @@ struct Plant
 
 };
 
-void InAll(std::ifstream& infile, RingList<Plant>& container);
-bool GetPlant(string line, Plant& object);
+void InAll(std::ofstream& outfile, std::ifstream& infile, RingList<Plant>& container);
+bool GetPlant(std::ofstream& outfile, string line, Plant& object, int watLine = 0);
 bool OutAll(std::ofstream& outfile, RingList<Plant>& container, bool filter = false);
 
 void Sort(RingList<Plant>& container);
@@ -61,6 +62,6 @@ bool Cmp(std::string l, std::string r);
 
 int Amount(std::string name);
 
-bool OutName(std::ofstream& outfile, Plant& plant);
+void OutName(std::ofstream& outfile, Plant& plant);
 
 char MyTolower(char ch);

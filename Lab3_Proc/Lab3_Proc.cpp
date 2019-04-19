@@ -25,13 +25,17 @@ int main(int amount, char* param[])
 		outfile.open("out.txt");
 	}
 
-
+	if ((!infile) || (!outfile))
+	{
+		std::cout << "Ошибка работы с файлами";
+		return -1;
+	}
 
 	std::cout << "Старт" << std::endl;
 
 	RingList<Plant> container;
 
-	InAll(infile, container);
+	InAll(outfile, infile, container);
 
 	std::cout << "Данные считаны с файла" << std::endl;
 
@@ -57,4 +61,7 @@ int main(int amount, char* param[])
 
 	std::cout << "Финиш" << std::endl;
 
+	infile.close();
+	outfile.close();
+	return 0;
 }
