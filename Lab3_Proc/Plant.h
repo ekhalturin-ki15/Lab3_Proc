@@ -8,6 +8,7 @@
 #include "Tree.h"
 #include "Flower.h"
 
+
 enum Type { tree, bush, flower };
 const std::vector<std::string> whereItGrows = { "тундре", "пустыни", "степи", "арктике" };
 const int MLEN = 19;
@@ -64,3 +65,6 @@ int Amount(std::string name);
 bool OutName(std::ofstream& outfile, Plant& plant);
 
 char MyTolower(char ch);
+
+bool MultiOutAll(std::ofstream& outfile, RingList<Plant>& container);
+

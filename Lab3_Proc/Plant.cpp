@@ -1,6 +1,5 @@
 ﻿#include "Plant.h"
-#include "Tree.h"
-#include "Bush.h"
+#include "Multi.h"
 #include <set>
 #include <sstream>
 
@@ -175,5 +174,49 @@ bool OutName(std::ofstream& outfile, Plant& plant)
 	outfile << " Его название = " << plant.name << " ; ";
 	outfile << "Кол-во согласных в названии = " << Amount(plant.name);
 	outfile << std::endl;
+	return true;
+}
+
+bool MultiOutAll(std::ofstream& outfile, RingList<Plant>& container)
+{
+	ElementRL<Plant>* it = container.begin();
+	ElementRL<Plant>* gt = container.begin();
+
+	for (int i = 0; i < container.WatAmount(); i++)
+	{
+		gt = it->next;
+		for (int j = i + 1; j < container.WatAmount(); j++)
+		{
+			switch (it->data.KEY)
+			{
+			case Type::tree:
+				switch (gt->data.KEY)
+				{
+				case Type::tree:
+					OutTreeTree(outfile, it->data.t, gt->data.t);
+					break;
+				case Type::bush:
+					OutTreeBush(outfile, it->data.t, gt->data.b);
+					break;
+				}
+				break;
+			case Type::bush:
+				switch (gt->data.KEY)
+				{
+				case Type::tree:
+					OutBushTree(outfile, it->data.b, gt->data.t);
+					break;
+				case Type::bush:
+					OutBushBush(outfile, it->data.b, gt->data.b);
+					break;
+				}
+				break;
+			}
+			OutThereName(outfile, it->data, gt->data);
+			gt = gt->next;
+		}
+		it = it->next;
+	}
+
 	return true;
 }
