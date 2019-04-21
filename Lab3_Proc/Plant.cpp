@@ -198,6 +198,9 @@ bool MultiOutAll(std::ofstream& outfile, RingList<Plant>& container)
 				case Type::bush:
 					OutTreeBush(outfile, it->data.t, gt->data.b);
 					break;
+				case Type::flower:
+					OutTreeFlower(outfile, it->data.t, gt->data.f);
+					break;
 				}
 				break;
 			case Type::bush:
@@ -208,6 +211,23 @@ bool MultiOutAll(std::ofstream& outfile, RingList<Plant>& container)
 					break;
 				case Type::bush:
 					OutBushBush(outfile, it->data.b, gt->data.b);
+					break;
+				case Type::flower:
+					OutBushFlower(outfile, it->data.b, gt->data.f);
+					break;
+				}
+				break;
+			case Type::flower:
+				switch (gt->data.KEY)
+				{
+				case Type::tree:
+					OutFlowerTree(outfile, it->data.f, gt->data.t);
+					break;
+				case Type::bush:
+					OutFlowerBush(outfile, it->data.f, gt->data.b);
+					break;
+				case Type::flower:
+					OutFlowerFlower(outfile, it->data.f, gt->data.f);
 					break;
 				}
 				break;
