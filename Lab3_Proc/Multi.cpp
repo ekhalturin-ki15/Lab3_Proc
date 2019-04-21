@@ -29,7 +29,7 @@ bool OutBushTree(std::ofstream& outfile, Bush b1, Tree t2)
 {
 	outfile << "Это куст и дерево ";
 
-	outfile << "куст цветет в " << watIsMonth[b1.month - 1] << ", а дереву" << t2.year << " лет ";
+	outfile << "куст цветет в " << watIsMonth[b1.month - 1] << ", а дереву " << t2.year << " лет ";
 
 	return true;
 }
