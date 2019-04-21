@@ -38,10 +38,10 @@ int main(int amount, char* param[])
 	OutAll(outfile, container);
 	outfile << "---------------" << std::endl;
 
-	std::cout << "Отсортировали" << std::endl;
-	Sort(container);
+	std::cout << "Мультивывод" << std::endl;
 
-	OutAll(outfile, container);
+	MultiOutAll(outfile, container);
+	
 
 	std::cout << "Данные выведенны в файл" << std::endl << "количество объектов: " << container.WatAmount() << std::endl;
 

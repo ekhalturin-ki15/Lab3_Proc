@@ -153,11 +153,13 @@
   <ItemGroup>
     <ClCompile Include="Bush.cpp" />
     <ClCompile Include="Lab3_Proc.cpp" />
+    <ClCompile Include="Multi.cpp" />
     <ClCompile Include="Plant.cpp" />
     <ClCompile Include="Tree.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bush.h" />
+    <ClInclude Include="Multi.h" />
     <ClInclude Include="Plant.h" />
     <ClInclude Include="RingList.h" />
     <ClInclude Include="Tree.h" />

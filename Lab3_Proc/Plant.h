@@ -42,6 +42,8 @@ void InAll(std::ifstream& infile, RingList<Plant>& container);
 void GetFlower(std::ifstream& infile, int type, Plant& object);
 void OutAll(std::ofstream& outfile, RingList<Plant> container);
 
+void MultiOutAll(std::ofstream& outfile, RingList<Plant> container);
+
 void Sort(RingList<Plant>& container);
 
 void QSort(std::vector<ElementRL<Plant>*>& mass, int l, int r);

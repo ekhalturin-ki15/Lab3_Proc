@@ -1,6 +1,7 @@
 ﻿#include "Plant.h"
 #include "Tree.h"
 #include "Bush.h"
+#include "Multi.h"
 
 using namespace std;
 
@@ -115,4 +116,38 @@ int cmp(Plant* l, Plant* r)
 	if (value[0] > value[1]) return 1;
 	if (value[0] < value[1]) return -1;
 	return 0;
+}
+
+
+
+void MultiOutAll(ofstream& outfile, RingList<Plant> container)
+{
+	ElementRL<Plant>* it = container.begin();
+	ElementRL<Plant>* ittoo = container.begin();
+	for (int i = 0; i < container.WatAmount(); i++)
+	{
+		ittoo = it->next;
+		for (int j = i+1; j < container.WatAmount(); j++)
+		{
+			switch (it->data.key)
+			{
+			case Type::tree:
+				switch (ittoo->data.key)
+				{
+				case Type::tree:
+					OutTreeTree(outfile, it->data.t, ittoo->data.t);
+					break;
+				}
+				break;
+
+			case Type::bush:
+
+				OutBush(outfile, it->data.b);
+				break;
+			
+			}
+			ittoo = ittoo->next;
+		}
+		it = it->next;
+	}
 }
